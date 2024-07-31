@@ -230,6 +230,14 @@ section h2 {
   object-fit: cover;
 }
 
+@media (max-width: 600px) {
+  .details-top img {
+    width: 200px;
+    height: 50%;
+    margin-right: 30px;
+  }
+}
+
 .details-top p {
   margin: 20px 0;
 }
