@@ -79,7 +79,9 @@ async function displayPopularMovies() {
           <div class="card-body">
             <h5 class="card-title">${movie.title}</h5>
             <p class="card-text">
-              <small class="text-muted">Release: ${movie.release_date}</small>
+              <small class="text-muted">Release: ${formatDate(
+                movie.release_date
+              )}</small>
             </p>
           </div>
         `;
@@ -114,7 +116,9 @@ async function displayPopularShows() {
           <div class="card-body">
             <h5 class="card-title">${show.name}</h5>
             <p class="card-text">
-              <small class="text-muted">Release: ${show.first_air_date}</small>
+              <small class="text-muted">First Aired: ${formatDate(
+                show.first_air_date
+              )}</small>
             </p>
           </div>
         `;
@@ -157,7 +161,9 @@ async function displayMovieDetails() {
           <i class="fas fa-star text-primary"></i>
           ${movie.vote_average.toFixed(1)} / 10
         </p>
-        <p class="text-muted">Release Date: ${movie.release_date}</p>
+        <p class="text-muted">Release Date: ${formatDate(
+          movie.release_date
+        )}</p>
         <p>
           ${movie.overview}
         </p>
@@ -229,7 +235,9 @@ async function displayShowDetails() {
           <i class="fas fa-star text-primary"></i>
           ${show.vote_average.toFixed(1)} / 10
         </p>
-        <p class="text-muted">First Aired: ${show.first_air_date}</p>
+        <p class="text-muted">First Aired: ${formatDate(
+          show.first_air_date
+        )}</p>
         <p>
           ${show.overview}
         </p>
@@ -252,7 +260,7 @@ async function displayShowDetails() {
                 show.last_episode_to_air.name
               } </li>
             <li><span class="text-secondary">Last Aired:</span> 
-              ${show.last_episode_to_air.air_date}</li>
+              ${formatDate(show.last_episode_to_air.air_date)}</li>
             </li>
             <li><span class="text-secondary">Status:</span> ${show.status}</li>
           </ul>
@@ -513,6 +521,9 @@ function showAlert(message, className = 'error') {
     alertEl.remove();
   }, 3000);
 }
+
+const formatDate = (date) =>
+  date.split('-')[2] + '-' + date.split('-')[1] + '-' + date.split('-')[0];
 
 // Function adds commas to numbers
 function addCommasToNumber(number) {
