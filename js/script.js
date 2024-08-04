@@ -756,7 +756,7 @@ function init() {
   console.log('Initializing page...'); // Debug line
   switch (global.currentPage) {
     case '/':
-    case '/index.html':
+    case '/index':
       displaySliderMovies();
       displayPopularMovies();
       break;
@@ -764,19 +764,19 @@ function init() {
       displaySliderShows();
       displayPopularShows();
       break;
-    case '/movie-details.html':
+    case '/movie-details':
       displayMovieDetails();
       break;
-    case '/tv-details.html':
+    case '/tv-details':
       displayShowDetails();
       break;
-    case '/person-details.html':
+    case '/person-details':
       displayPersonDetails();
       break;
-    case '/search.html':
+    case '/search':
       search();
       break;
-    case '/actors.html':
+    case '/actors':
       displayPopularActors();
       break;
   }
