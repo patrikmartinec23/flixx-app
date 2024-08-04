@@ -15,7 +15,6 @@ const global = {
 
 // Fetch data from TMDB API
 async function fetchAPIData(endpoint) {
-  console.log(`Fetching data from endpoint: ${endpoint}`);
   // Register your key at https://www.themoviedb.org/settings/api and
   // enter here
   // Only use this for development or very small projects. You should
@@ -27,10 +26,6 @@ async function fetchAPIData(endpoint) {
 
   const response = await fetch(
     `${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US`
-  );
-
-  console.log(
-    `Fetching URL: ${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US`
   );
 
   const data = await response.json();
@@ -752,8 +747,6 @@ function addCommasToNumber(number) {
 
 // Init App
 function init() {
-  console.log('Current page:', global.currentPage); // Debug line
-  console.log('Initializing page...'); // Debug line
   switch (global.currentPage) {
     case '/':
     case '/index':
