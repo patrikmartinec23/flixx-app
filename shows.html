@@ -30,6 +30,9 @@
             <li>
               <a class="nav-link" href="/shows.html">TV Shows</a>
             </li>
+            <li>
+              <a class="nav-link" href="/actors.html">Actors</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -40,6 +43,35 @@
       <h2>Now Airing</h2>
       <div class="swiper">
         <div class="swiper-wrapper"></div>
+      </div>
+    </section>
+
+    <!-- Search Movies -->
+    <section class="search">
+      <div class="container">
+        <div id="alert"></div>
+        <form action="/search.html" class="search-form">
+          <!-- movies and shows radio box -->
+          <div class="search-radio">
+            <input type="radio" id="movie" name="type" value="movie" />
+            <label for="movies">Movies</label>
+            <input type="radio" id="tv" name="type" value="tv" checked />
+            <label for="shows">TV Shows</label>
+            <input type="radio" id="person" name="type" value="person" />
+            <label for="people">People</label>
+          </div>
+          <div class="search-flex">
+            <input
+              type="text"
+              name="search-term"
+              id="search-term"
+              placeholder="Enter search term"
+            />
+            <button class="btn" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
       </div>
     </section>
 
