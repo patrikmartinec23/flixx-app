@@ -757,16 +757,16 @@ function init() {
       displaySliderShows();
       displayPopularShows();
       break;
-    case '/movie-details':
+    case '/movie-details.html':
       displayMovieDetails();
       break;
-    case '/tv-details':
+    case '/tv-details.html':
       displayShowDetails();
       break;
-    case '/person-details':
+    case '/person-details.html':
       displayPersonDetails();
       break;
-    case '/search':
+    case '/search.html':
       search();
       break;
     case '/actors':
