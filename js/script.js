@@ -760,7 +760,7 @@ function init() {
       displaySliderMovies();
       displayPopularMovies();
       break;
-    case '/shows.html':
+    case '/shows':
       displaySliderShows();
       displayPopularShows();
       break;
