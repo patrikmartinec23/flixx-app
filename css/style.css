@@ -348,3 +348,7 @@ section h2 {
 .error {
   background: red;
 }
+
+.actors {
+  margin-bottom: 20px;
+}

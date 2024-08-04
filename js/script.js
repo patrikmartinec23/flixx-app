@@ -132,6 +132,7 @@ async function displayMovieDetails() {
   const movieId = window.location.search.split('=')[1];
 
   const movie = await fetchAPIData(`movie/${movieId}`);
+  const credits = await fetchAPIData(`movie/${movieId}/credits`);
 
   // Overlay for backdrop image
   displayBackdropImage('movie', movie.backdrop_path);
@@ -179,17 +180,27 @@ async function displayMovieDetails() {
         <div class="details-bottom">
           <h2>Movie Info</h2>
           <ul>
-            <li><span class="text-secondary">Budget:</span> $${addCommasToNumber(
-              movie.budget
-            )}</li>
-            <li><span class="text-secondary">Revenue:</span> $${addCommasToNumber(
-              movie.revenue
-            )}</li>
+            <li><span class="text-secondary">Budget:</span> ${
+              isZero(movie.budget)
+                ? "Can't find the budget for the movie"
+                : addCommasToNumber(movie.budget)
+            }</li>
+            <li><span class="text-secondary">Revenue:</span> ${
+              isZero(movie.revenue)
+                ? "Can't find the revenue for the movie"
+                : addCommasToNumber(movie.revenue)
+            }</li>
             <li><span class="text-secondary">Runtime:</span> ${
               movie.runtime
             } minutes</li>
             <li><span class="text-secondary">Status:</span> ${movie.status}</li>
+            <li><span class="text-secondary">
+            Director:</span> ${getDirectors(credits).join(', ')}</li>
           </ul>
+          <h4>Actors</h4>
+          <div class="list-group actors">
+          ${getActors(credits).join(', ')}
+          </div>
           <h4>Production Companies</h4>
           <div class="list-group">
             ${movie.production_companies
@@ -206,6 +217,7 @@ async function displayShowDetails() {
   const showId = window.location.search.split('=')[1];
 
   const show = await fetchAPIData(`tv/${showId}`);
+  const credits = await fetchAPIData(`tv/${showId}/credits`);
 
   // Overlay for backdrop image
   displayBackdropImage('tv', show.backdrop_path);
@@ -264,6 +276,10 @@ async function displayShowDetails() {
             </li>
             <li><span class="text-secondary">Status:</span> ${show.status}</li>
           </ul>
+          <h4>Actors</h4>
+          <div class="list-group actors">
+          ${getActors(credits).join(', ')}
+          </div>
           <h4>Production Companies</h4>
           <div class="list-group">
             ${show.production_companies
@@ -522,12 +538,54 @@ function showAlert(message, className = 'error') {
   }, 3000);
 }
 
+function isZero(num) {
+  return num === 0;
+}
+
+// Get the directors
+function getDirectors(credits) {
+  const listOfDirectors = [];
+  credits.cast.forEach((actor) => {
+    if (
+      actor.known_for_department === 'Directing' ||
+      actor.known_for_department === 'Writing'
+    ) {
+      listOfDirectors.push(actor.name);
+    }
+  });
+
+  if (listOfDirectors.length === 0) {
+    return ["Can't find directors for this movie."];
+  } else {
+    return listOfDirectors;
+  }
+}
+
+// Get the actors
+function getActors(credits) {
+  const listOfActors = [];
+  credits.cast.forEach((actor) => {
+    if (actor.known_for_department === 'Acting') {
+      listOfActors.push(actor.name);
+    }
+  });
+
+  if (listOfActors.length === 0) {
+    return ["Can't find actors for this movie or show."];
+  } else if (listOfActors.length > 5) {
+    return listOfActors.slice(0, 5);
+  } else {
+    return listOfActors;
+  }
+}
+
+// Format date to european style
 const formatDate = (date) =>
   date.split('-')[2] + '-' + date.split('-')[1] + '-' + date.split('-')[0];
 
 // Function adds commas to numbers
 function addCommasToNumber(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return '$' + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 // Init App
