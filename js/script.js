@@ -752,6 +752,7 @@ function addCommasToNumber(number) {
 
 // Init App
 function init() {
+  console.log('Initializing page...'); // Debug line
   switch (global.currentPage) {
     case '/':
     case '/index.html':
